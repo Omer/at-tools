@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Updater for at-tools (www.github.com/xoebus/at-tools)
+# Updater for at-tools (www.github.com/lolsoft/at-tools)
 
 def command(command, dir = '.')
     Dir.chdir(dir) do

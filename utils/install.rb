@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Installer for at-tools (www.github.com/xoebus/at-tools)
+# Installer for at-tools (www.github.com/lolsoft/at-tools)
 
 require 'fileutils'
 require 'pathname'

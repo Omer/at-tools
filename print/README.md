@@ -8,7 +8,7 @@ Often you will print something in Appleton only to find that the printer is out 
 
 Documentation
 -------------
-The documentation for this project can be found in the [wiki](http://wiki.github.com/xoebus/print/) for this Github Project. This documentation will always be the most up to date and will follow development. Official releases will have this mirrored into the downloadable source for reference.
+The documentation for this project can be found in the [wiki](http://wiki.github.com/lolsoft/at-tools/print/) for this Github Project. This documentation will always be the most up to date and will follow development. Official releases will have this mirrored into the downloadable source for reference.
 
 Contributing
 ------------

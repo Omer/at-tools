@@ -5,7 +5,7 @@ then
 fi
 
 echo "Cloning Appleton Tower Tools..."
-/usr/bin/env git clone git://github.com/xoebus/at-tools.git ~/.at-tools
+/usr/bin/env git clone git://github.com/lolsoft/at-tools.git ~/.at-tools
 
 echo "Installing on your system..."
 /usr/bin/env ruby ~/.at-tools/utils/install.rb
