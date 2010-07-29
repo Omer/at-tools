@@ -16,8 +16,8 @@ There are a number of ways to get help with `at-tools`.
 
 * The quickest and easiest way is to append `--help` to any of the commands which will give you the quick help for using that tool.
 * Feel free to ask in the *lolsoft* IRC channel which is located at:
-** Server: `www.imaginarynet.org.uk`
-** Channel: `#lolsoft`
+  * Server: `www.imaginarynet.org.uk`
+  * Channel: `#lolsoft`
 * Man pages are currently being written which will allow for more help to be distributed with the toolset.
 
 ### Contributing
