@@ -33,6 +33,9 @@ FileUtils.ln_s(AT_TOOLS_DIR + '/cen/bin/cen',
 FileUtils.ln_s(AT_TOOLS_DIR + '/att/bin/att',
                AT_TOOLS_BIN + '/att')
 
+FileUtils.ln_s(AT_TOOLS_DIR + '/inthelabs/itl-client.rb',
+               AT_TOOLS_BIN + '/inthelabs')
+
 puts "Updating PATH"
 command('echo "PATH=$PATH:' + AT_TOOLS_BIN + '" >> ~/.bash_profile')
 command('source ~/.bash_profile')
