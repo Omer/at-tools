@@ -13,7 +13,7 @@ rescue
 	@id_file = File.open("#{ID_PATH}", 'w+')
 end
 
-@server = 'localhost'
+@server = 'magnus.xen.tardis.ed.ac.uk'
 @port = 54415
 @details ||= IO.readlines(ID_PATH)
 
