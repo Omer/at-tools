@@ -13,13 +13,13 @@ def update_map(hostname,cascaders,cascmap)
 	cascmap.children.each { |machine|
 		if hostname == machine.text
 			machine.text=(">>YOU ARE HERE<<")
-			cascaders.each { |cascader|
-				details = get_details(cascader)
-				if details[1] == machine.text
-					machine.text=("CASCADER:\n#{details[0]}\n[#{details[2]}]")
-				end
-			}
 		end
+		cascaders.each { |cascader|
+			details = get_details(cascader)
+			if details[1] == machine.text
+				machine.text=("CASCADER:\n#{details[0]}\n[#{details[2]}]")
+			end
+		}
 		
 	}
 end
