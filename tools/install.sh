@@ -18,3 +18,4 @@ echo '| (_| | |_       | || (_) | (_) | \__ \'
 echo ' \__,_|\__|       \__\___/ \___/|_|___/'
 echo "....is now installed."
 
+source ~/.bash_profile
