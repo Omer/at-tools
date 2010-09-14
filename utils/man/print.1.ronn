@@ -1,0 +1,94 @@
+print(1) -- makes printing in AT easy-peasy
+=============================================
+
+## SYNOPSIS
+
+`print` [<options>...] [<file>...]
+
+## DESCRIPTION
+
+**Print** makes printing in AT much easier by removing the multitude of hoops
+that are in your way just to print a file.
+
+With no extra options `print` prints the <file>s to the *best* black and white
+printer for your location. It determines this from which machine you are working
+on, the number of print jobs currently in the printers and whether or not the
+printers are actually working.
+
+## FILES
+
+The `print` command will accept any file that `lpr` accepts on DICE.
+
+## OPTIONS
+
+These options control whether output is written to file(s), standard output, or
+directly to a man pager.
+
+  * `-P`, `--printer`=<printer>:
+    Force `print` to use a certain printer. It will use this printer unless the
+    printer is not available. If the printer is not available then the print will
+    fail.
+    
+  * `-r`, `--reprint`:
+    Reprints the last file to the same printer. This command is useful if you want
+    to send a test run of a print job. If the job turns out okay then you can send
+    this command with some more copies.
+  
+  * `-a`, `--abort`:
+    Cancels the last print job. If you want to do this then you're going to have
+    to be very fast or there has to be a queue of print jobs. If not, then it will
+    start printing before it can be cancelled. You might want to hit *Cancel* on
+    the printer if you accidentally printed a book.
+
+Printing options which control the actual output of the print job:
+
+  * `-n`, `--number`=<copies>:
+    How many times would you like your files to be printed? Put that after this
+    argument. Simples.
+
+  * `-c`, `--colour`:
+    Choose the best colour printer for the job. May result in you having to walk
+    up some stairs.
+
+## EXAMPLES
+
+Prints ~/StudentClass.java to the best printer:
+
+    print ~/StudentClass.java
+
+The -P (--printer) option forces the job to be printed to a certain printer:
+
+    print -P at14 ~/StudentClass.java
+
+The -c (--colour) option makes sure a colour printer is used:
+
+    print -c ~/StudentClass.java
+
+The -a (--abort) option cancels the last job you printed:
+
+    print --abort
+
+The -r (--reprint) option resends the last job you printed:
+
+    print -r
+
+The -n (--number) option prints that many copies of the file you request:
+
+    print -n 15 ~/StudentClass.java
+
+## BUGS
+
+**Print** is written in Ruby and has no dependencies because it must run on
+DICE which does not allow for external dependencies. This limits the fancy
+features that we can implement.
+
+The most obvious thing that is missing at the moment is different page layouts
+such as *4-up*, *2-up* and *duplex*. These should be added soon.
+
+## COPYRIGHT
+
+Print is Copyright (C) 2009 Lolsoft <http://lolsoft.github.com/>
+
+## SEE ALSO
+
+cen(1), cascader(1), cascader-gui(1), att(1)

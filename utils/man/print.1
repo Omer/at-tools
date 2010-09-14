@@ -1,0 +1,135 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "PRINT" "1" "August 2010" "Lolsoft" "at-tools"
+.
+.SH "NAME"
+\fBprint\fR \- makes printing in AT easy\-peasy
+.
+.SH "SYNOPSIS"
+\fBprint\fR [\fIoptions\fR\.\.\.] [\fIfile\fR\.\.\.]
+.
+.SH "DESCRIPTION"
+\fBPrint\fR makes printing in AT much easier by removing the multitude of hoops that are in your way just to print a file\.
+.
+.P
+With no extra options \fBprint\fR prints the \fIfile\fRs to the \fIbest\fR black and white printer for your location\. It determines this from which machine you are working on, the number of print jobs currently in the printers and whether or not the printers are actually working\.
+.
+.SH "FILES"
+The \fBprint\fR command will accept any file that \fBlpr\fR accepts on DICE\.
+.
+.SH "OPTIONS"
+These options control whether output is written to file(s), standard output, or directly to a man pager\.
+.
+.TP
+\fB\-P\fR, \fB\-\-printer\fR=\fIprinter\fR
+Force \fBprint\fR to use a certain printer\. It will use this printer unless the printer is not available\. If the printer is not available then the print will fail\.
+.
+.TP
+\fB\-r\fR, \fB\-\-reprint\fR
+Reprints the last file to the same printer\. This command is useful if you want to send a test run of a print job\. If the job turns out okay then you can send this command with some more copies\.
+.
+.TP
+\fB\-a\fR, \fB\-\-abort\fR
+Cancels the last print job\. If you want to do this then you\'re going to have to be very fast or there has to be a queue of print jobs\. If not, then it will start printing before it can be cancelled\. You might want to hit \fICancel\fR on the printer if you accidentally printed a book\.
+.
+.P
+Printing options which control the actual output of the print job:
+.
+.TP
+\fB\-n\fR, \fB\-\-number\fR=\fIcopies\fR
+How many times would you like your files to be printed? Put that after this argument\. Simples\.
+.
+.TP
+\fB\-c\fR, \fB\-\-colour\fR
+Choose the best colour printer for the job\. May result in you having to walk up some stairs\.
+.
+.SH "EXAMPLES"
+Prints ~/StudentClass\.java to the best printer:
+.
+.IP "" 4
+.
+.nf
+
+print ~/StudentClass\.java
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The \-P (\-\-printer) option forces the job to be printed to a certain printer:
+.
+.IP "" 4
+.
+.nf
+
+print \-P at14 ~/StudentClass\.java
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The \-c (\-\-colour) option makes sure a colour printer is used:
+.
+.IP "" 4
+.
+.nf
+
+print \-c ~/StudentClass\.java
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The \-a (\-\-abort) option cancels the last job you printed:
+.
+.IP "" 4
+.
+.nf
+
+print \-\-abort
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The \-r (\-\-reprint) option resends the last job you printed:
+.
+.IP "" 4
+.
+.nf
+
+print \-r
+.
+.fi
+.
+.IP "" 0
+.
+.P
+The \-n (\-\-number) option prints that many copies of the file you request:
+.
+.IP "" 4
+.
+.nf
+
+print \-n 15 ~/StudentClass\.java
+.
+.fi
+.
+.IP "" 0
+.
+.SH "BUGS"
+\fBPrint\fR is written in Ruby and has no dependencies because it must run on DICE which does not allow for external dependencies\. This limits the fancy features that we can implement\.
+.
+.P
+The most obvious thing that is missing at the moment is different page layouts such as \fI4\-up\fR, \fI2\-up\fR and \fIduplex\fR\. These should be added soon\.
+.
+.SH "COPYRIGHT"
+Print is Copyright (C) 2009 Lolsoft \fIhttp://lolsoft\.github\.com/\fR
+.
+.SH "SEE ALSO"
+cen(1), cascader(1), cascader\-gui(1), att(1)
