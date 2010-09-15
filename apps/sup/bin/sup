@@ -4,9 +4,52 @@ require "uri"
 require "net/http"
 require "optparse"
 
+def ask(question, default=nil, valid = /.*/, multiline=false)
+  output = question
+  output << " [#{default}]" unless default.nil?
+  output << " (Optional)" if valid =~ ""
+  output << ": "
+  puts output
+  
+  matches = false
+  answer = default
+
+  while not matches
+    if multiline
+      answer = ""
+      while not (input = gets).nil?
+        answer << input
+      end
+    else
+      answer = gets.chomp
+    end
+
+    matches = answer =~ valid
+    
+    if answer.empty? and default 
+        answer = default
+        matches = true
+    end
+   
+    unless matches
+      puts "The entered input is invalid. Please try again: "
+    end 
+  end 
+
+  answer
+end
+
+man = ask "Are you a man???", "Y/N"
+puts man
+
 # Set up the usage options.
 
-options = {}
+options = {
+  :user => ENV['LOGNAME'] || ENV['USERNAME'] || ENV['USER'],
+  :machine => ENV['SHORT_HOSTNAME'],
+  :email => nil,
+  :urgent => 0,
+}
 
 optparse = OptionParser.new do |opts|
 	opts.banner = "Usage: sup [OPTIONS] \"title\" \"message\""
@@ -22,76 +65,57 @@ optparse = OptionParser.new do |opts|
 
 	opts.separator ""
 	opts.separator "General"
-	opts.separator ""
 
-	options[:user] = nil
-	opts.on("-u", "--user USERNAME", "The username to use when sending the report. Defaults to the username of the current login.") do |user|
+	opts.on("-u", "--user=USERNAME",
+          "The username to use when sending the report. Defaults to the current username.") do |user|
 		options[:user] = user
 	end
 
-	options[:machine] = nil
-	opts.on("-m", "--machine MACHINE", "The machine which you are reporting a problem with. Defaults to the current machine name, if available.") do |machine|
+	opts.on("-m", "--machine=MACHINE", "The machine which you are reporting a problem with.") do |machine|
 		options[:machine] = machine
 	end
 
 	opts.separator ""
 	opts.separator "Additional"
-	opts.separator ""
 
-	options[:email] = nil
-	opts.on("-e", "--email EMAIL", "An alternative email address for the support request. If not specified, Computing Support will use USERNAME@sms.ed.ac.uk") do |email|
+	opts.on("-e", "--email=EMAIL", "An alternative email address for the support request.") do |email|
 		options[:email] = email
 	end
 
-	options[:urgent] = nil
 	opts.on("-s", "--serious", "Marks the request as urgently requiring attention.") do
 		options[:urgent] = 1
 	end
-
-	opts.separator ""
-
-end
-
-begin
-	optparse.parse!
-rescue
-	puts "Invalid flag supplied."
-	puts optparse.help
-	exit
-end
-
-if ARGV.empty?
-	puts optparse.help
-	exit
-end
+end.parse!
 
 # Try and get the current username if the user didnt enter one.
-# May want to check with a regexp to make sure its a valid dice name? (As in, if user on non-dice computer.)
-if options[:user].nil? 
-	options[:user] = ENV['LOGNAME'] || ENV['USERNAME'] || ENV['USER'] || ask("Cannot detect username. Please enter it manually: ")
-end
+#
+# May want to check with a regexp to make sure its a valid dice name?
+# (As in, if user on non-dice computer.)
+options[:user] = ask "Username", options[:user], /s\d+/
+options[:machine] = ask "Machine Name", options[:machine], /.+/
+options[:email] = options[:email] || ask "Email", nil, /.*/
+options[:urgent] = ask "Urgent?", options[:urgent], /(1|0)/
 
-# Try and get the current machine name if the user didn't enter one.
-if options[:machine].nil?
-	options[:machine] = ENV['SHORT_HOSTNAME'] || ask("Cannot detect machine name. Please enter it manually: ")
-end
+subject = ARGV.shift || ask "Subject", nil, /.+/
+description = ARGV.shift || ask "Message", nil, /.+/, true
 
-# No need to test for ARGV[0] because already tested for ARGV.empty?
-subject = ARGV[0]
-
-if ARGV[1].nil?
-	puts "Missing description argument."
-	puts optparse.help
-	exit
-else
-	description = ARGV[1]
-end
-
-# Fire off the request. Currently uses a test php file located on my (Stephen McGruer) website which merely echos the 
-# POST values.
-# We need to find out how to test that we're addressing the "urgent" keyword properly without spamming CS. Maybe ask them what they
-# try and match?
+# Fire off the request. Currently uses a test php file located on my
+# (Stephen McGruer) website which merely echos the POST values.
+#
+# We need to find out how to test that we're addressing the "urgent"
+# keyword properly without spamming CS. Maybe ask them what they try and
+# match?
+#
 # Will also need to guard against 404, 403, no connection, etc.
-params = {"username" => options[:user], "machine_name" => options[:machine], "email" => (options[:email] || ""), "short_message" => subject, "urgent" => options[:urgent] || 0, "long_message" => description}
-x = Net::HTTP.post_form(URI.parse("http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php"), params)
-puts x.body
+params = {
+  :username => options[:user],
+  :machine_name => options[:machine],
+  :email => (options[:email],
+  :short_message => subject,
+  :urgent => options[:urgent],
+  :long_message => description
+}
+
+response = Net::HTTP.post_form(URI.parse("http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php"), params)
+
+puts response.body
