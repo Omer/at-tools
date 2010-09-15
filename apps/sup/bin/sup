@@ -16,10 +16,11 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
 
   while not matches
     if multiline
-      answer = ""
+        answer = ""
       while not (input = gets).nil?
         answer << input
       end
+      answer.chomp!
     else
       answer = gets.chomp
     end
@@ -27,8 +28,8 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
     matches = answer =~ valid
     
     if answer.empty? and default 
-        answer = default
-        matches = true
+      answer = default
+      matches = true
     end
    
     unless matches
@@ -45,56 +46,61 @@ options = {
   :user => ENV['LOGNAME'] || ENV['USERNAME'] || ENV['USER'],
   :machine => ENV['SHORT_HOSTNAME'],
   :email => nil,
-  :urgent => 0,
+  :urgent => 0
 }
 
 optparse = OptionParser.new do |opts|
-	opts.banner = "Usage: sup [OPTIONS] \"title\" \"message\""
-	opts.program_name = "sup"
-	opts.version = "0.0.1"
+  opts.banner = "Usage: sup [OPTIONS] [TITLE] [MESSAGE]"
+  opts.program_name = "sup"
+  opts.version = "0.0.1"
+  
+  opts.on("-h", "--help", "Display this screen.") do
+    puts opts
+    exit
+  end
 
-	opts.separator ""
+  opts.separator ""
+  opts.separator "General"
 
-	opts.on("-h", "--help", "Display this screen." ) do
-		puts opts
-		exit
-	end
-
-	opts.separator ""
-	opts.separator "General"
-
-	opts.on("-u", "--user=USERNAME",
+  opts.on("-u", "--user=USERNAME",
           "The username to use when sending the report. Defaults to the current username.") do |user|
-		options[:user] = user
-	end
+    options[:user] = user
+  end
 
-	opts.on("-m", "--machine=MACHINE", "The machine which you are reporting a problem with.") do |machine|
-		options[:machine] = machine
-	end
+  opts.on("-m", "--machine=MACHINE", "The machine which you are reporting a problem with.") do |machine|
+    options[:machine] = machine
+  end
 
-	opts.separator ""
-	opts.separator "Additional"
+  opts.separator ""
+  opts.separator "Additional"
 
-	opts.on("-e", "--email=EMAIL", "An alternative email address for the support request.") do |email|
-		options[:email] = email
-	end
+  opts.on("-e", "--email=EMAIL", "An alternative email address for the support request.") do |email|
+    options[:email] = email
+  end
 
-	opts.on("-s", "--serious", "Marks the request as urgently requiring attention.") do
-		options[:urgent] = 1
-	end
-end.parse!
+  opts.on("-s", "--serious", "Marks the request as urgently requiring attention.") do
+    options[:urgent] = 1
+  end
+end
 
+begin
+  optparse.parse!
+rescue OptionParser::InvalidOption
+  puts optparse.help
+  exit 0
+end
+# 
 # Try and get the current username if the user didnt enter one.
 #
 # May want to check with a regexp to make sure its a valid dice name?
 # (As in, if user on non-dice computer.)
-options[:user] = ask "Username", options[:user], /s\d+/
-options[:machine] = ask "Machine Name", options[:machine], /.+/
-options[:email] = options[:email] || ask "Email", nil, /.*/
-options[:urgent] = ask "Urgent?", options[:urgent], /(1|0)/
+options[:user] = ask("Username", options[:user], /s\d+/)
+options[:machine] = ask("Machine Name", options[:machine], /.+/)
+options[:email] = options[:email] || ask("Email", nil, /.*/)
+options[:urgent] = ask("Urgent?", options[:urgent], /(1|0)/)
 
-subject = ARGV.shift || ask "Subject", nil, /.+/
-description = ARGV.shift || ask "Message", nil, /.+/, true
+subject = ARGV.shift || ask("Subject", nil, /.+/)
+description = ARGV.shift || ask("Message", nil, /.+/, true)
 
 # Fire off the request. Currently uses a test php file located on my
 # (Stephen McGruer) website which merely echos the POST values.
@@ -107,7 +113,7 @@ description = ARGV.shift || ask "Message", nil, /.+/, true
 params = {
   :username => options[:user],
   :machine_name => options[:machine],
-  :email => (options[:email],
+  :email => options[:email],
   :short_message => subject,
   :urgent => options[:urgent],
   :long_message => description
