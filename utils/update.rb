@@ -12,8 +12,8 @@ def command(command, dir = '.')
     end
 end
 
-def current_tools
-  Dir.glob('../apps/*').map { |path| path.split('/').last }
+def tools_in dir
+  Dir.glob("../#{dir}/*").map { |path| path.split('/').last }
 end
 
 def link app
@@ -21,11 +21,11 @@ def link app
                  AT_TOOLS_BIN + "/#{app}")
 end
 
-old_tools = current_tools
+old_tools = tools_in 'bin'
 
 puts 'Checking for changes and updating at-tools core and programs...'
 command('git pull', AT_TOOLS_SRC)
 
-new_tools = current_tools - old_tools
+new_tools = tools_in('apps') - old_tools
 
 new_tools.each { |tool| link tool }
