@@ -39,9 +39,6 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
   answer
 end
 
-man = ask "Are you a man???", "Y/N"
-puts man
-
 # Set up the usage options.
 
 options = {
