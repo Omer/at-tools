@@ -16,7 +16,7 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
 
   while not matches
     if multiline
-        answer = ""
+      answer = ""
       while not (input = gets).nil?
         answer << input
       end
