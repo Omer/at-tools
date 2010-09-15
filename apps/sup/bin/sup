@@ -100,7 +100,7 @@ options[:email] = options[:email] || ask("Email", nil, /.*/)
 options[:urgent] = ask("Urgent?", options[:urgent], /(1|0)/)
 
 subject = ARGV.shift || ask("Subject", nil, /.+/)
-description = ARGV.shift || ask("Message", nil, /.+/, true)
+description = ARGV.shift || ask("Message (Ctrl-D to submit.)", nil, /.+/, true)
 
 # Fire off the request. Currently uses a test php file located on my
 # (Stephen McGruer) website which merely echos the POST values.
