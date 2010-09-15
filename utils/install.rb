@@ -12,25 +12,26 @@ def command(command, dir = '.')
 end
 
 AT_TOOLS_DIR = File.expand_path('~/.at-tools/')
+AT_APPS_DIR = AT_TOOLS_BIN + '/apps'
 AT_TOOLS_BIN = AT_TOOLS_DIR + '/bin'
 
 puts "Making directories"
 FileUtils.mkdir_p(AT_TOOLS_BIN)
 
 puts "Linking programs"
-FileUtils.ln_s(AT_TOOLS_DIR + '/cascader/bin/cascader',
+FileUtils.ln_s(AT_APPS_DIR + '/cascader/bin/cascader',
                AT_TOOLS_BIN + '/cascader')
 
-FileUtils.ln_s(AT_TOOLS_DIR + '/cascader-gui/bin/cascader-gui',
+FileUtils.ln_s(AT_APPS_DIR + '/cascader-gui/bin/cascader-gui',
 	       AT_TOOLS_BIN + '/cascader-gui')
 
-FileUtils.ln_s(AT_TOOLS_DIR + '/print/bin/print',
+FileUtils.ln_s(AT_APPS_DIR + '/print/bin/print',
                AT_TOOLS_BIN + '/print')
 
-FileUtils.ln_s(AT_TOOLS_DIR + '/cen/bin/cen',
+FileUtils.ln_s(AT_APPS_DIR + '/cen/bin/cen',
                AT_TOOLS_BIN + '/cen')
 
-FileUtils.ln_s(AT_TOOLS_DIR + '/att/bin/att',
+FileUtils.ln_s(AT_APPS_DIR + '/att/bin/att',
                AT_TOOLS_BIN + '/att')
 
 puts "Updating PATH"
