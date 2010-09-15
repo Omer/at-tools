@@ -1,0 +1,97 @@
+#!/usr/bin/env ruby
+
+require "uri"
+require "net/http"
+require "optparse"
+
+# Set up the usage options.
+
+options = {}
+
+optparse = OptionParser.new do |opts|
+	opts.banner = "Usage: sup [OPTIONS] \"title\" \"message\""
+	opts.program_name = "sup"
+	opts.version = "0.0.1"
+
+	opts.separator ""
+
+	opts.on("-h", "--help", "Display this screen." ) do
+		puts opts
+		exit
+	end
+
+	opts.separator ""
+	opts.separator "General"
+	opts.separator ""
+
+	options[:user] = nil
+	opts.on("-u", "--user USERNAME", "The username to use when sending the report. Defaults to the username of the current login.") do |user|
+		options[:user] = user
+	end
+
+	options[:machine] = nil
+	opts.on("-m", "--machine MACHINE", "The machine which you are reporting a problem with. Defaults to the current machine name, if available.") do |machine|
+		options[:machine] = machine
+	end
+
+	opts.separator ""
+	opts.separator "Additional"
+	opts.separator ""
+
+	options[:email] = nil
+	opts.on("-e", "--email EMAIL", "An alternative email address for the support request. If not specified, Computing Support will use USERNAME@sms.ed.ac.uk") do |email|
+		options[:email] = email
+	end
+
+	options[:urgent] = nil
+	opts.on("-s", "--serious", "Marks the request as urgently requiring attention.") do
+		options[:urgent] = 1
+	end
+
+	opts.separator ""
+
+end
+
+begin
+	optparse.parse!
+rescue
+	puts "Invalid flag supplied."
+	puts optparse.help
+	exit
+end
+
+if ARGV.empty?
+	puts optparse.help
+	exit
+end
+
+# Try and get the current username if the user didnt enter one.
+# May want to check with a regexp to make sure its a valid dice name? (As in, if user on non-dice computer.)
+if options[:user].nil? 
+	options[:user] = ENV['LOGNAME'] || ENV['USERNAME'] || ENV['USER'] || ask("Cannot detect username. Please enter it manually: ")
+end
+
+# Try and get the current machine name if the user didn't enter one.
+if options[:machine].nil?
+	options[:machine] = ENV['SHORT_HOSTNAME'] || ask("Cannot detect machine name. Please enter it manually: ")
+end
+
+# No need to test for ARGV[0] because already tested for ARGV.empty?
+subject = ARGV[0]
+
+if ARGV[1].nil?
+	puts "Missing description argument."
+	puts optparse.help
+	exit
+else
+	description = ARGV[1]
+end
+
+# Fire off the request. Currently uses a test php file located on my (Stephen McGruer) website which merely echos the 
+# POST values.
+# We need to find out how to test that we're addressing the "urgent" keyword properly without spamming CS. Maybe ask them what they
+# try and match?
+# Will also need to guard against 404, 403, no connection, etc.
+params = {"username" => options[:user], "machine_name" => options[:machine], "email" => (options[:email] || ""), "short_message" => subject, "urgent" => options[:urgent] || 0, "long_message" => description}
+x = Net::HTTP.post_form(URI.parse("http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php"), params)
+puts x.body
