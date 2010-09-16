@@ -9,7 +9,11 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
   output << " [#{default}]" unless default.nil?
   output << " (Optional)" if valid =~ ""
   output << ": "
-  puts output
+  if multiline
+	  puts output
+  else
+	  print output
+  end
   
   matches = false
   answer = default
@@ -85,19 +89,17 @@ end
 
 begin
   optparse.parse!
-rescue OptionParser::InvalidOption
+rescue OptionParser::InvalidOption => e
+  puts "sup: " + e
   puts optparse.help
   exit 0
 end
-# 
-# Try and get the current username if the user didnt enter one.
-#
-# May want to check with a regexp to make sure its a valid dice name?
-# (As in, if user on non-dice computer.)
-options[:user] = ask("Username", options[:user], /s\d+/)
+ 
+# Get input from the user, with defaults if they are set. 
+options[:user] = ask("Username", options[:user], /^s\d+/)
 options[:machine] = ask("Machine Name", options[:machine], /.+/)
 options[:email] = options[:email] || ask("Email", nil, /.*/)
-options[:urgent] = ask("Urgent?", options[:urgent], /(1|0)/)
+options[:urgent] = (ask("Urgent?", options[:urgent], /^(0|1)$/)
 
 subject = ARGV.shift || ask("Subject", nil, /.+/)
 description = ARGV.shift || ask("Message (Ctrl-D to submit.)", nil, /.+/, true)
