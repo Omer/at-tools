@@ -99,7 +99,7 @@ end
 options[:user] = ask("Username", options[:user], /^s\d+/)
 options[:machine] = ask("Machine Name", options[:machine], /.+/)
 options[:email] = options[:email] || ask("Email", nil, /.*/)
-options[:urgent] = (ask("Urgent?", options[:urgent], /^(0|1)$/)
+options[:urgent] = ask("Urgent?", options[:urgent], /^(0|1)$/)
 
 subject = ARGV.shift || ask("Subject", nil, /.+/)
 description = ARGV.shift || ask("Message (Ctrl-D to submit.)", nil, /.+/, true)
