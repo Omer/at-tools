@@ -38,6 +38,11 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
    
     unless matches
       puts "The entered input is invalid. Please try again: "
+	  if multiline
+		  puts output
+	  else
+		  print output
+	  end
     end 
   end 
 
