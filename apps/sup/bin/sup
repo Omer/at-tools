@@ -8,9 +8,10 @@ LIB_ROOT = APP_ROOT + "/lib"
 require LIB_ROOT + "/sup"
 
 # The ask function. Current uses double-enter for submitting.
-def ask(question, default=nil, valid = /.*/, multiline=false)
-  output = question
-  output << " [#{default}]" unless default.nil?
+def ask(question, default=nil, valid = /.*/, multiline=false, extra=nil)
+  output = question.cyanish
+  output << " #{extra}" unless extra.nil?
+  output << " [#{default.greenish}]" unless default.nil?
   output << " (Optional)" if valid =~ ""
   output << ": "
   if multiline
@@ -41,7 +42,7 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
     end
    
     unless matches
-      puts "The entered input is invalid. Please try again: "
+      puts "The entered input is invalid. Please try again: ".red
 	  if multiline
 		  puts output
 	  else
@@ -111,21 +112,21 @@ end
 request.username = ask("Username", request.username, /^s\d+/)
 request.machine = ask("Machine Name", request.machine, /.+/)
 request.email = request.email || ask("Email", nil, /.*/)
-request.urgent = Integer(ask("Urgent?", request.urgent, /^(0|1)$/))
+request.urgent = ask("Urgent?", request.urgent.to_s, /^(0|1)$/).to_i
 
 request.subject = ARGV.shift || ask("Subject", nil, /.+/)
-request.description = ARGV.shift || ask("Message (Double return to submit.)", nil, /.+/, true)
+request.description = ARGV.shift || ask("Message", nil, /.+/, true, "(Double return to submit.)")
 
 # Final check:
 puts "\nRequest is...\n"
-puts "Username: " + request.username
-puts "Machine: " + request.machine
-puts "Email: " + request.email unless request.email.empty?
-puts "[Urgent]" if request.urgent == 1
-puts "Subject: " + request.subject
-puts "Message: "
-puts request.description
-exit 0 if (ask "\nSend request? (Y/N) ", nil, /^[YN]$/i).upcase.eql? "N"
+puts "Username: ".cyanish + request.username.purpleish
+puts "Machine: ".cyanish + request.machine.purpleish
+puts "Email: ".cyanish + request.email.purpleish unless request.email.empty?
+puts "[Urgent]".cyanish if request.urgent == 1
+puts "Subject: ".cyanish + request.subject.purpleish
+puts "Message: ".cyanish
+puts request.description.purpleish
+exit 0 if (ask "\nSend request?", nil, /^[YN]$/i, false, "(Y/N)").upcase.eql? "N"
 
 begin
 
@@ -139,6 +140,6 @@ begin
 
 rescue RequestException => e
 
-    puts e.message
+    puts e.message.red
 
 end
