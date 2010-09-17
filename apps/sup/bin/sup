@@ -43,11 +43,11 @@ def ask(question, default=nil, valid = /.*/, multiline=false, extra=nil)
    
     unless matches
       puts "The entered input is invalid. Please try again: ".red
-	  if multiline
-		  puts output
-	  else
-		  print output
-	  end
+    if multiline
+      puts output
+    else
+      print output
+    end
     end 
   end 
 
@@ -133,13 +133,23 @@ begin
     # Fire off the request. 
     response = request.submit!
 
-    puts "\n\nResponse:"
+    unless reponse =~ /$Your message has been sent to the Support team^/
+        puts "Error: Request may have not been accepted.".red
+        puts "The following HTML was returned:"
+        puts reponse.body
+        puts "\nPlease contact the development team about this issue, including this entire message."
+        puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)"
+        exit
+    end
 
-    # Output the result.
-    puts response.body
+    puts "\n\nRequest received and accepted. You should receive an automated reply from computing support soon."
+    puts "Thanks for using sup!"
 
 rescue RequestException => e
 
+    puts "Request failed. Error message:"
     puts e.message.red
+    puts "If you think you should not have encountered this error, please contact the development team, including the error."
+    puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)"
 
 end
