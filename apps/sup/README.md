@@ -7,9 +7,9 @@ Sup is a tool to send computing support requests via the terminal.
 Sup is primarly designed to take input from within the program, not from terminal flags, but the latter are accepted by the program as laid out below.
 If flags are used, their values will be set as the default values for the appropriate fields.
 
-Usage: sup [OPTIONS] [SUBJECT] [MESSAGE]
+    Usage: sup [OPTIONS] [SUBJECT] [MESSAGE]
 
-    	-h, --help                       Display this screen.
+      	-h, --help                       Display this screen.
 
 	General
 
