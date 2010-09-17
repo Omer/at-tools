@@ -24,7 +24,9 @@ class Request
 		@urgent = 0
 	end
 
-	def submit!(url = "http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php")
+	def submit!(url = "http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test2.php")
+
+    #def submit!(url = "http://www.inf.ed.ac.uk/cgi-bin/send-sup-form.cgi")
 
 		# Fire off the request. Currently uses a test php file located on my
 		# (Stephen McGruer) website which merely echos the POST values.

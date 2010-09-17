@@ -134,11 +134,11 @@ begin
     response = request.submit!
 
     unless response.body.include? "Your message has been sent to the Support team."
-        puts "Error: Request may have not been accepted.".red
-        puts "The following HTML was returned:"
+        puts "\n\nError: Request may have not been accepted.".red
+        puts "The following HTML was returned:\n".cyanish
         puts response.body
-        puts "\nPlease contact the development team about this issue, including this entire message."
-        puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)"
+        puts "\nPlease contact the development team about this issue, including this entire message.".cyanish
+        puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)".cyanish
         exit
     end
 
