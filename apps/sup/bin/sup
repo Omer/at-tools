@@ -133,7 +133,7 @@ begin
     # Fire off the request. 
     response = request.submit!
 
-    unless response =~ /$Your message has been sent to the Support team^/
+    unless response.include? "Your message has been sent to the Support team."
         puts "Error: Request may have not been accepted.".red
         puts "The following HTML was returned:"
         puts response.body
