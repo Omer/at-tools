@@ -1,6 +1,18 @@
 require "uri"
 require "net/http"
 
+class RequestException < RuntimeError
+
+    attr_reader :message
+
+    def initialize message
+
+        @message = message
+
+    end
+
+end
+
 class Request
 
 	attr_accessor :username, :machine, :email, :urgent, :subject, :description
@@ -12,7 +24,7 @@ class Request
 		@urgent = 0
 	end
 
-	def submit(url = "http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php")
+	def submit!(url = "http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php")
 
 		# Fire off the request. Currently uses a test php file located on my
 		# (Stephen McGruer) website which merely echos the POST values.
@@ -30,8 +42,18 @@ class Request
 		  :urgent => self.urgent,
 		  :long_message => self.description
 		}
-		
-		response = Net::HTTP.post_form(URI.parse(url), params)
+
+        begin
+    		response = Net::HTTP.post_form(URI.parse(url), params)
+        rescue Net::HTTPExceptions => e 
+            raise RequestException.new(e.message)
+        rescue SocketError => e
+            raise RequestException.new(e.message)
+        end
+
+        raise RequestException.new("RequestException: Request failed (response code: #{response.code})") unless response.code.eql? "200"
+
+        response
 
 	end
 

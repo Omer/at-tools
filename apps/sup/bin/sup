@@ -50,8 +50,6 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
     end 
   end 
 
-  $/ = "\n"
-
   answer
 
 end
@@ -127,13 +125,20 @@ puts "[Urgent]" if request.urgent == 1
 puts "Subject: " + request.subject
 puts "Message: "
 puts request.description
-print "\nSend request? (Y/N) "
-exit 0 if(gets.chomp.upcase == "N") 
+exit 0 if (ask "\nSend request? (Y/N) ", nil, /^[YN]$/i).upcase.eql? "N"
 
-puts "\n\nResponse:"
+begin
 
-# Fire off the request. 
-response = request.submit
+    # Fire off the request. 
+    response = request.submit!
 
-# Output the result.
-puts response.body
+    puts "\n\nResponse:"
+
+    # Output the result.
+    puts response.body
+
+rescue RequestException => e
+
+    puts e.message
+
+end
