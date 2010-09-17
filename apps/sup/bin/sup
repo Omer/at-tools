@@ -26,10 +26,10 @@ def ask(question, default=nil, valid = /.*/, multiline=false, extra=nil)
   while not matches
 
     if multiline
-        while not (input = gets) == "\n"
-            answer << input
-        end
-        answer.chomp!
+      while not (input = gets) == "\n"
+        answer << input
+      end
+      answer.chomp!
     else
       answer = gets.chomp
     end
@@ -130,26 +130,26 @@ exit 0 if (ask "\nSend request?", nil, /^[YN]$/i, false, "(Y/N)").upcase.eql? "N
 
 begin
 
-    # Fire off the request. 
-    response = request.submit!
+  # Fire off the request. 
+  response = request.submit!
 
-    unless response.body.include? "Your message has been sent to the Support team."
-        puts "\n\nError: Request may have not been accepted.".red
-        puts "The following HTML was returned:\n".cyanish
-        puts response.body
-        puts "\nPlease contact the development team about this issue, including this entire message.".cyanish
-        puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)".cyanish
-        exit
-    end
+  unless response.body.include? "Your message has been sent to the Support team."
+    puts "\n\nError: Request may have not been accepted.".red
+    puts "The following HTML was returned:\n".cyanish
+    puts response.body
+    puts "\nPlease contact the development team about this issue, including this entire message.".cyanish
+    puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)".cyanish
+    exit
+  end
 
-    puts "\n\nRequest received and accepted. You should receive an automated reply from computing support soon."
-    puts "Thanks for using sup!"
+  puts "\n\nRequest received and accepted. You should receive an automated reply from computing support soon."
+  puts "Thanks for using sup!"
 
 rescue RequestException => e
 
-    puts "Request failed. Error message:"
-    puts e.message.red
-    puts "If you think you should not have encountered this error, please contact the development team, including the error."
-    puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)"
+  puts "Request failed. Error message:"
+  puts e.message.red
+  puts "If you think you should not have encountered this error, please contact the development team, including the error."
+  puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)"
 
 end
