@@ -1,3 +1,6 @@
+require "uri"
+require "net/http"
+
 class Request
 
 	attr_accessor :username, :machine, :email, :urgent, :subject, :description
