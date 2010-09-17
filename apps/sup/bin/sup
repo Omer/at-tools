@@ -3,28 +3,34 @@
 require "uri"
 require "net/http"
 require "optparse"
+require "pathname"
 
+APP_ROOT = File.join(File.dirname(Pathname.new(__FILE__).realpath),'/..')
+LIB_ROOT = APP_ROOT + "/lib"
+require LIB_ROOT + "/sup"
+
+# The ask function. Current uses double-enter for submitting.
 def ask(question, default=nil, valid = /.*/, multiline=false)
   output = question
   output << " [#{default}]" unless default.nil?
   output << " (Optional)" if valid =~ ""
   output << ": "
   if multiline
-	  puts output
+    puts output
   else
-	  print output
+    print output
   end
   
   matches = false
-  answer = default
+  answer = default || ""
 
   while not matches
+
     if multiline
-      answer = ""
-      while not (input = gets).nil?
-        answer << input
-      end
-      answer.chomp!
+        while not (input = gets) == "\n"
+            answer << input
+        end
+        answer.chomp!
     else
       answer = gets.chomp
     end
@@ -46,16 +52,21 @@ def ask(question, default=nil, valid = /.*/, multiline=false)
     end 
   end 
 
+  $/ = "\n"
+
   answer
+
 end
 
 # Set up the usage options.
 
+request = Request.new
+
 options = {
-  :user => ENV['LOGNAME'] || ENV['USERNAME'] || ENV['USER'],
-  :machine => ENV['SHORT_HOSTNAME'],
-  :email => nil,
-  :urgent => 0
+  :user => request.username,
+  :machine => request.machine,
+  :email => request.email,
+  :urgent => request.urgent
 }
 
 optparse = OptionParser.new do |opts|
@@ -72,23 +83,23 @@ optparse = OptionParser.new do |opts|
   opts.separator "General"
 
   opts.on("-u", "--user=USERNAME",
-          "The username to use when sending the report. Defaults to the current username.") do |user|
-    options[:user] = user
+    "The username to use when sending the report. Defaults to the current username.") do |user|
+    request.username = user
   end
 
   opts.on("-m", "--machine=MACHINE", "The machine which you are reporting a problem with.") do |machine|
-    options[:machine] = machine
+    request.machine = machine
   end
 
   opts.separator ""
   opts.separator "Additional"
 
   opts.on("-e", "--email=EMAIL", "An alternative email address for the support request.") do |email|
-    options[:email] = email
+    request.email = email
   end
 
   opts.on("-s", "--serious", "Marks the request as urgently requiring attention.") do
-    options[:urgent] = 1
+    request.urgent = 1
   end
 end
 
@@ -101,31 +112,30 @@ rescue OptionParser::InvalidOption => e
 end
  
 # Get input from the user, with defaults if they are set. 
-options[:user] = ask("Username", options[:user], /^s\d+/)
-options[:machine] = ask("Machine Name", options[:machine], /.+/)
-options[:email] = options[:email] || ask("Email", nil, /.*/)
-options[:urgent] = ask("Urgent?", options[:urgent], /^(0|1)$/)
+request.username = ask("Username", request.username, /^s\d+/)
+request.machine = ask("Machine Name", request.machine, /.+/)
+request.email = request.email || ask("Email", nil, /.*/)
+request.urgent = Integer(ask("Urgent?", request.urgent, /^(0|1)$/))
 
-subject = ARGV.shift || ask("Subject", nil, /.+/)
-description = ARGV.shift || ask("Message (Ctrl-D to submit.)", nil, /.+/, true)
+request.subject = ARGV.shift || ask("Subject", nil, /.+/)
+request.description = ARGV.shift || ask("Message (Double return to submit.)", nil, /.+/, true)
 
-# Fire off the request. Currently uses a test php file located on my
-# (Stephen McGruer) website which merely echos the POST values.
-#
-# We need to find out how to test that we're addressing the "urgent"
-# keyword properly without spamming CS. Maybe ask them what they try and
-# match?
-#
-# Will also need to guard against 404, 403, no connection, etc.
-params = {
-  :username => options[:user],
-  :machine_name => options[:machine],
-  :email => options[:email],
-  :short_message => subject,
-  :urgent => options[:urgent],
-  :long_message => description
-}
+# Final check:
+puts "\nRequest is...\n"
+puts "Username: " + request.username
+puts "Machine: " + request.machine
+puts "Email: " + request.email unless request.email.empty?
+puts "[Urgent]" if request.urgent == 1
+puts "Subject: " + request.subject
+puts "Message: "
+puts request.description
+print "\nSend request? (Y/N) "
+exit 0 if(gets.chomp.upcase == "N") 
 
-response = Net::HTTP.post_form(URI.parse("http://www.tardis.ed.ac.uk/~ediblespread/rubytest/test.php"), params)
+puts "\n\nResponse:"
 
+# Fire off the request. 
+response = request.submit
+
+# Output the result.
 puts response.body
