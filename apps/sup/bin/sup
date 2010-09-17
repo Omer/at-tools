@@ -133,10 +133,10 @@ begin
     # Fire off the request. 
     response = request.submit!
 
-    unless reponse =~ /$Your message has been sent to the Support team^/
+    unless response =~ /$Your message has been sent to the Support team^/
         puts "Error: Request may have not been accepted.".red
         puts "The following HTML was returned:"
-        puts reponse.body
+        puts response.body
         puts "\nPlease contact the development team about this issue, including this entire message."
         puts "(Issue tracker url: http://github.com/lolsoft/at-tools/issues)"
         exit
