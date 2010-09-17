@@ -13,7 +13,6 @@ when "man"
   if ARGV.first.nil?
     puts "Please specify a app name. e.g. att man print"
   else
-    puts "man #{AT_MAN_PATH}/#{ARGV.first}.1"
     `man #{AT_MAN_PATH}/#{ARGV.first}.1`
   end
 else
