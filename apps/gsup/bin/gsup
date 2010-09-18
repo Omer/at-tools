@@ -13,94 +13,203 @@ rescue LoadError => le
   exit
 end
 
-authors = ['Stephen \"ediblespread\" McGruer']
 
-request = Request.new
+def gtk_setup(request = nil)
 
-#####
-## Window Intialisation
-#####
+  authors = ['Stephen \"ediblespread\" McGruer']
 
-window = Gtk::Window.new
-window.set_default_size(400,400)
-window.signal_connect("delete_event") {
-  window.hide_all
-}
+  #####
+  ## Window Intialisation
+  #####
 
-#####
-## Main Page Setup
-####
+  window = Gtk::Window.new
+  window.set_default_size(400,400)
+  window.signal_connect("delete_event") {
+    window.hide_all
+  }
 
-vbox = Gtk::VBox.new
+  #####
+  ## Main Page Setup
+  ####
 
-table1 = Gtk::Table.new(5,2)
-table2 = Gtk::Table.new(2,1)
-table3 = Gtk::Table.new(3,1)
+  vbox = Gtk::VBox.new
 
-username_label = Gtk::Label.new "Username"
-username_entry = Gtk::Entry.new
-username_entry.text = request.username || ""
+  table1 = Gtk::Table.new(5,2)
+  table2 = Gtk::Table.new(2,1)
+  table3 = Gtk::Table.new(3,1)
 
-machine_label = Gtk::Label.new "Machine"
-machine_entry = Gtk::Entry.new
-machine_entry.text = request.machine || ""
+  username_label = Gtk::Label.new "Username:"
+  username_entry = Gtk::Entry.new
+  username_entry.text = request.username || ""
 
-email_label = Gtk::Label.new "Email"
-email_entry = Gtk::Entry.new
+  machine_label = Gtk::Label.new "Machine:"
+  machine_entry = Gtk::Entry.new
+  machine_entry.text = request.machine || ""
 
-urgent_checkbox = Gtk::CheckButton.new "Urgent"
+  email_label = Gtk::Label.new "Email"
+  email_entry = Gtk::Entry.new
 
-subject_label = Gtk::Label.new "Subject"
-subject_entry = Gtk::Entry.new
+  urgent_checkbox = Gtk::CheckButton.new "Urgent"
 
-description_label = Gtk::Label.new "description"
-description_entry_buffer = Gtk::TextBuffer.new
-description_entry_view = Gtk::TextView.new description_entry_buffer
+  subject_label = Gtk::Label.new "Subject"
+  subject_entry = Gtk::Entry.new
 
-reset_button = Gtk::Button.new "Reset Form"
-cancel_button = Gtk::Button.new "Cancel"
-cancel_button.signal_connect("clicked") {
+  description_label = Gtk::Label.new "description"
+  description_entry_buffer = Gtk::TextBuffer.new
+  description_entry_view = Gtk::TextView.new description_entry_buffer
+
+  reset_button = Gtk::Button.new "Reset Form"
+  cancel_button = Gtk::Button.new "Cancel"
+  cancel_button.signal_connect("clicked") {
     Gtk.main_quit
-}
-submit_button = Gtk::Button.new "Submit"
-submit_button.signal_connect("clicked") {
-    request.username = username_entry.text unless username_entry.text = ""
-    request.machine = machine_entry.text unless username_entry.text = ""
+  }
+  submit_button = Gtk::Button.new "Submit"
+  submit_button.signal_connect("clicked") {
+
+    # Copy over the values.
+    request.username = username_entry.text 
+    request.machine = machine_entry.text 
     request.email = email_entry.text
     request.urgent = 1 if urgent_checkbox.active?
     request.subject = subject_entry.text
     request.description = description_entry_buffer.text
-    response = request.submit!
-    puts response
-    Gtk.main_quit
-}
+
+    process_form(request, window)
+
+  }
 
 
-table1.attach(username_label,0,1,0,1,nil,nil,10,10)
-table1.attach(username_entry,1,2,0,1,nil,nil,10,10)
+  table1.attach(username_label,0,1,0,1,nil,nil,10,10)
+  table1.attach(username_entry,1,2,0,1,nil,nil,10,10)
 
-table1.attach(machine_label,0,1,1,2,nil,nil,10,10)
-table1.attach(machine_entry,1,2,1,2,nil,nil,10,10)
+  table1.attach(machine_label,0,1,1,2,nil,nil,10,10)
+  table1.attach(machine_entry,1,2,1,2,nil,nil,10,10)
 
-table1.attach(email_label,0,1,2,3,nil,nil,10,10)
-table1.attach(email_entry,1,2,2,3,nil,nil,10,10)
+  table1.attach(email_label,0,1,2,3,nil,nil,10,10)
+  table1.attach(email_entry,1,2,2,3,nil,nil,10,10)
 
-table1.attach(subject_label,0,1,3,4,nil,nil,10,10)
-table1.attach(subject_entry,1,2,3,4,nil,nil,10,10)
+  table1.attach(subject_label,0,1,3,4,nil,nil,10,10)
+  table1.attach(subject_entry,1,2,3,4,nil,nil,10,10)
 
-table1.attach(description_label,0,1,4,5,nil,nil,10,10)
+  table1.attach(description_label,0,1,4,5,nil,nil,10,10)
 
-table2.attach(description_entry_view,0,1,0,1,nil,nil,10,10)
-table2.attach(urgent_checkbox,0,1,1,2,nil,nil,10,10)
+  table2.attach(description_entry_view,0,1,0,1,nil,nil,10,10)
+  table2.attach(urgent_checkbox,0,1,1,2,nil,nil,10,10)
 
-table3.attach(reset_button,0,1,0,1,nil,nil,0,0)
-table3.attach(cancel_button,1,2,0,1,nil,nil,0,0)
-table3.attach(submit_button,2,3,0,1,nil,nil,0,0)
+  table3.attach(reset_button,0,1,0,1,nil,nil,0,0)
+  table3.attach(cancel_button,1,2,0,1,nil,nil,0,0)
+  table3.attach(submit_button,2,3,0,1,nil,nil,0,0)
 
-vbox.add(table1)
-vbox.add(table2)
-vbox.add(table3)
-window.add(vbox)
-window.show_all
+  vbox.add(table1)
+  vbox.add(table2)
+  vbox.add(table3)
+  window.add(vbox)
+  window.show_all
 
-Gtk.main
+end
+
+def process_form(request = nil, window = nil)
+
+  # Check all necessary fields filled in.
+  problems = Array.new
+
+  if request.username.empty? or request.username.nil?
+    problems << ['Username', 'empty']
+  elsif request.username !~ /^s[\d]+$/
+    problems << ['Username', 'invalid']
+  end
+
+  if request.machine.empty? or request.machine.nil?
+    problems << ['Machine', 'empty']
+  end
+
+  if request.subject.empty? or request.subject.nil?
+    problems << ['Subject', 'empty']
+  end
+
+  if request.description.empty? or request.description.nil?
+    problems << ['Description', 'empty']
+  end
+
+  # If there are any problems, scold the user and do nothing.
+  if problems.empty?
+  
+    # Form accepted, double check with user
+    check_string = "Form reads as follows:"
+    check_string += "\n\nSend form?"
+
+    dialog = Gtk::MessageDialog.new(window,
+                                    Gtk::Dialog::DESTROY_WITH_PARENT,
+                                    Gtk::MessageDialog::QUESTION,
+                                    Gtk::MessageDialog::BUTTONS_YES_NO,
+                                    check_string)
+
+    dialog.run do |response|
+
+      case response
+      when Gtk::Dialog::RESPONSE_YES
+        puts request.submit!
+        Gtk.main_quit
+      else
+      end
+
+      dialog.destroy
+
+    end
+
+    
+
+  else
+
+    # Split the problems into their different types.
+    empty_problems = Array.new
+    invalid_problems = Array.new
+    problems.each { |problem|
+      if problem[1] == "empty"
+        empty_problems << problem[0]
+      elsif problem[1] == "invalid"
+        invalid_problems << problem[0]
+      else
+        puts "Fuck..."
+      end
+    }
+
+    # Create a problem string:
+    problems_string = "Form submission failed due to errors in the form! The following errors were encountered:"
+    problems_string += "\n\nThe following fields were empty:" unless empty_problems.empty?
+    empty_problems.each { |problem|
+      problems_string += "\n" + problem
+    }
+    problems_string += "\n\nThe following fields were invalid:" unless invalid_problems.empty?
+    invalid_problems.each { |problem|
+      problems_string += "\n" + problem
+    }
+   
+    # Create a dialog box with the list of problems.
+    dialog = Gtk::MessageDialog.new(window, 
+                                    Gtk::Dialog::DESTROY_WITH_PARENT, 
+                                    Gtk::MessageDialog::WARNING, 
+                                    Gtk::MessageDialog::BUTTONS_CLOSE,
+                                    problems_string)
+    dialog.run
+    dialog.destroy
+    #dialog = Gtk::Dialog.new("Test", window, nil, [Gtk::Stock::OK])
+
+    #dialog.signal_connect('response') { dialog.destroy }
+    
+    #dialog.vbox.add(Gtk::Label.new(problems_string))
+    #dialog.show_all
+
+  end
+  
+  
+end
+
+if __FILE__ == $0
+
+
+  request = Request.new
+  gtk_setup(request)
+  Gtk.main
+
+end
