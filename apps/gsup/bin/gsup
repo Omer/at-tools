@@ -1,0 +1,106 @@
+#!/usr/bin/env ruby
+
+require "gtk2"
+require "pathname"
+
+APP_ROOT = File.join(File.dirname(Pathname.new(__FILE__).realpath), '/..')
+LIB_ROOT = APP_ROOT + '/lib'
+
+begin
+  require LIB_ROOT + '/gsup'
+rescue LoadError => le
+  puts "Cannot find sup program. gsup requires sup to work!"
+  exit
+end
+
+authors = ['Stephen \"ediblespread\" McGruer']
+
+request = Request.new
+
+#####
+## Window Intialisation
+#####
+
+window = Gtk::Window.new
+window.set_default_size(400,400)
+window.signal_connect("delete_event") {
+  window.hide_all
+}
+
+#####
+## Main Page Setup
+####
+
+vbox = Gtk::VBox.new
+
+table1 = Gtk::Table.new(5,2)
+table2 = Gtk::Table.new(2,1)
+table3 = Gtk::Table.new(3,1)
+
+username_label = Gtk::Label.new "Username"
+username_entry = Gtk::Entry.new
+username_entry.text = request.username || ""
+
+machine_label = Gtk::Label.new "Machine"
+machine_entry = Gtk::Entry.new
+machine_entry.text = request.machine || ""
+
+email_label = Gtk::Label.new "Email"
+email_entry = Gtk::Entry.new
+
+urgent_checkbox = Gtk::CheckButton.new "Urgent"
+
+subject_label = Gtk::Label.new "Subject"
+subject_entry = Gtk::Entry.new
+
+description_label = Gtk::Label.new "description"
+description_entry_buffer = Gtk::TextBuffer.new
+description_entry_view = Gtk::TextView.new description_entry_buffer
+
+reset_button = Gtk::Button.new "Reset Form"
+cancel_button = Gtk::Button.new "Cancel"
+cancel_button.signal_connect("clicked") {
+    Gtk.main_quit
+}
+submit_button = Gtk::Button.new "Submit"
+submit_button.signal_connect("clicked") {
+    request.username = username_entry.text unless username_entry.text = ""
+    request.machine = machine_entry.text unless username_entry.text = ""
+    request.email = email_entry.text
+    request.urgent = 1 if urgent_checkbox.active?
+    request.subject = subject_entry.text
+    request.description = description_entry_buffer.text
+    response = request.submit!
+    puts response
+    Gtk.main_quit
+}
+
+
+table1.attach(username_label,0,1,0,1,nil,nil,10,10)
+table1.attach(username_entry,1,2,0,1,nil,nil,10,10)
+
+table1.attach(machine_label,0,1,1,2,nil,nil,10,10)
+table1.attach(machine_entry,1,2,1,2,nil,nil,10,10)
+
+table1.attach(email_label,0,1,2,3,nil,nil,10,10)
+table1.attach(email_entry,1,2,2,3,nil,nil,10,10)
+
+table1.attach(subject_label,0,1,3,4,nil,nil,10,10)
+table1.attach(subject_entry,1,2,3,4,nil,nil,10,10)
+
+table1.attach(description_label,0,1,4,5,nil,nil,10,10)
+
+table2.attach(description_entry_view,0,1,0,1,nil,nil,10,10)
+table2.attach(urgent_checkbox,0,1,1,2,nil,nil,10,10)
+
+table3.attach(reset_button,0,1,0,1,nil,nil,0,0)
+table3.attach(cancel_button,1,2,0,1,nil,nil,0,0)
+table3.attach(submit_button,2,3,0,1,nil,nil,0,0)
+
+vbox.add(table1)
+vbox.add(table2)
+vbox.add(table3)
+window.add(vbox)
+window.show_all
+
+Gtk.main
