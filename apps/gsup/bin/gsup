@@ -23,9 +23,11 @@ def gtk_setup(request = nil)
   #####
 
   window = Gtk::Window.new
+  window.resizable = false
+  #window.decorated = false
   window.set_default_size(400,400)
   window.signal_connect("delete_event") {
-    window.hide_all
+    Gtk.main_quit
   }
 
   #####
