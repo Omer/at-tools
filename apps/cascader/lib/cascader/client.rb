@@ -13,7 +13,7 @@ class Client
         host = cascader_re.match(cascader)[2]
         topics = cascader_re.match(cascader)[3].split(':').map { |topic| topic.capitalize }
         
-        lab = HostManager.name_lab(HostManager.lookup_lab(host))
+        lab = HostManager.lookup_lab(host)
         padding = " " * (35 - (host.length + lab.length))
         
         topics.map! do |topic|
