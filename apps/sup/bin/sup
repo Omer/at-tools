@@ -26,10 +26,20 @@ def ask(question, default=nil, valid = /.*/, multiline=false, extra=nil)
   while not matches
 
     if multiline
-      while not (input = gets) == "\n"
-        answer << input
+      #while not (input = gets) == "\n"
+      #  answer << input
+      #end
+      #answer.chomp!
+      old_stty = `stty -g`
+      system "stty -icanon min 1 time 0"
+      temp_answer = ""
+      while true
+        char = STDIN.getc
+        break if char == ?\C-d
+        temp_answer += char.chr
       end
-      answer.chomp!
+      system "stty #{old_stty}"
+      answer = temp_answer unless temp_answer.empty?
     else
       answer = gets.chomp
     end
