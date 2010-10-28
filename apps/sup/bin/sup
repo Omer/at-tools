@@ -26,26 +26,22 @@ def ask(question, default=nil, valid = /.*/, multiline=false, extra=nil)
   while not matches
 
     if multiline
-      #while not (input = gets) == "\n"
-      #  answer << input
-      #end
-      #answer.chomp!
-      old_stty = `stty -g`
-      system "stty -icanon min 1 time 0"
       temp_answer = ""
       while true
-        char = STDIN.getc
-        break if char == ?\C-d
-        temp_answer += char.chr
+        begin
+          input = STDIN.sysread(1)
+          answer += input
+        rescue EOFError
+          break
+        end
       end
-      system "stty #{old_stty}"
-      answer = temp_answer unless temp_answer.empty?
     else
-      answer = gets.chomp
+      temp_answer = gets
+      answer = temp_answer.chomp! unless temp_answer.nil?
     end
 
     matches = answer =~ valid
-    
+
     if answer.empty? and default 
       answer = default
       matches = true
@@ -125,7 +121,7 @@ request.email = request.email || ask("Email", nil, /.*/)
 request.urgent = ask("Urgent?", request.urgent.to_s, /^(0|1)$/).to_i
 
 request.subject = ARGV.shift || ask("Subject", nil, /.+/)
-request.description = ARGV.shift || ask("Message", nil, /.+/, true, "(Double return to submit.)")
+request.description = ARGV.shift || ask("Message", nil, /.+/, true, "(Press Enter then Ctrl-D to submit.)")
 
 # Final check:
 puts "\nRequest is...\n"
@@ -154,6 +150,7 @@ begin
 
   puts "\n\nRequest received and accepted. You should receive an automated reply from computing support soon."
   puts "Thanks for using sup!"
+  puts response.body
 
 rescue RequestException => e
 
