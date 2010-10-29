@@ -150,7 +150,6 @@ begin
 
   puts "\n\nRequest received and accepted. You should receive an automated reply from computing support soon."
   puts "Thanks for using sup!"
-  puts response.body
 
 rescue RequestException => e
 
