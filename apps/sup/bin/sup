@@ -26,16 +26,22 @@ def ask(question, default=nil, valid = /.*/, multiline=false, extra=nil)
   while not matches
 
     if multiline
-      while not (input = gets) == "\n"
-        answer << input
+      temp_answer = ""
+      while true
+        begin
+          input = STDIN.sysread(1)
+          answer += input
+        rescue EOFError
+          break
+        end
       end
-      answer.chomp!
     else
-      answer = gets.chomp
+      temp_answer = gets
+      answer = temp_answer.chomp! unless temp_answer.nil?
     end
 
     matches = answer =~ valid
-    
+
     if answer.empty? and default 
       answer = default
       matches = true
@@ -115,7 +121,7 @@ request.email = request.email || ask("Email", nil, /.*/)
 request.urgent = ask("Urgent?", request.urgent.to_s, /^(0|1)$/).to_i
 
 request.subject = ARGV.shift || ask("Subject", nil, /.+/)
-request.description = ARGV.shift || ask("Message", nil, /.+/, true, "(Double return to submit.)")
+request.description = ARGV.shift || ask("Message", nil, /.+/, true, "(Press Enter then Ctrl-D to submit.)")
 
 # Final check:
 puts "\nRequest is...\n"
