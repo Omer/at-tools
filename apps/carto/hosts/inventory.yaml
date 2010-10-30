@@ -1,0 +1,1060 @@
+--- 
+tay: 
+  floor: "5"
+  room: "01"
+stastny: 
+  floor: "5"
+  room: CL-W
+rotorua: 
+  floor: "4"
+  room: "02"
+rosberg: 
+  floor: "4"
+  room: "12"
+picton: 
+  floor: "4"
+  room: "14"
+boisdale: 
+  floor: "5"
+  room: CL-W
+esposito: 
+  floor: "4"
+  room: "14"
+zuse: 
+  floor: "5"
+  room: "02"
+strathisla: 
+  floor: "8"
+  room: "12"
+raycroft: 
+  floor: "5"
+  room: CL-W
+lavallee: 
+  floor: "4"
+  room: "14"
+luongo: 
+  floor: "5"
+  room: CL-N
+winnipeg: 
+  floor: "8"
+  room: "16"
+subaru: 
+  floor: "4"
+  room: 08
+ratz: 
+  floor: B
+  room: SERVER
+puzo: 
+  floor: "3"
+  room: "05"
+lemming: 
+  floor: "5"
+  room: "07"
+ledin: 
+  floor: "5"
+  room: CL-W
+fangio: 
+  floor: "5"
+  room: CL-N
+florida: 
+  floor: "5"
+  room: "02"
+macallan: 
+  floor: "8"
+  room: "12"
+race: 
+  floor: "3"
+  room: "01"
+canungra: 
+  floor: "5"
+  room: "02"
+gair: 
+  floor: "3"
+  room: "01"
+bieska: 
+  floor: "5"
+  room: CL-N
+duich: 
+  floor: "5"
+  room: CL-W
+clunie: 
+  floor: "5"
+  room: "02"
+morton: 
+  floor: "5"
+  room: CL-S
+coulthard: 
+  floor: "5"
+  room: CL-W
+boychuk: 
+  floor: "5"
+  room: CL-N
+alfaromeo: 
+  floor: "3"
+  room: 09
+treig: 
+  floor: "5"
+  room: CL-S
+tequila: 
+  floor: "3"
+  room: "11"
+mansell: 
+  floor: "5"
+  room: CL-W
+kaip: 
+  floor: "4"
+  room: "14"
+bradford: 
+  floor: "5"
+  room: CL-W
+yelle: 
+  floor: "5"
+  room: CL-S
+sobotka: 
+  floor: "5"
+  room: CL-S
+marquardt: 
+  floor: "3"
+  room: "05"
+motzko: 
+  floor: "4"
+  room: "12"
+watten: 
+  floor: "3"
+  room: "11"
+svatos: 
+  floor: "5"
+  room: CL-W
+sloy: 
+  floor: "5"
+  room: CL-W
+sashko: 
+  floor: "3"
+  room: 09
+faro: 
+  floor: "6"
+  room: "02"
+fred: 
+  floor: "5"
+  room: CL-N
+curlew: 
+  floor: B
+  room: SERVER
+carron: 
+  floor: "5"
+  room: CL-W
+kesler: 
+  floor: "5"
+  room: CL-N
+modupe: 
+  floor: "5"
+  room: CL-W
+tartini: 
+  floor: "4"
+  room: "12"
+sort: 
+  floor: "5"
+  room: "06"
+shiel: 
+  floor: "3"
+  room: "03"
+bosendorfer: 
+  floor: "5"
+  room: "02"
+andretti: 
+  floor: "3"
+  room: 09
+mondonville: 
+  floor: "4"
+  room: "12"
+interpol: 
+  floor: "3"
+  room: 09
+wolski: 
+  floor: "5"
+  room: CL-W
+tummel: 
+  floor: "3"
+  room: "03"
+espresso: 
+  floor: "5"
+  room: CL-N
+vancouver: 
+  floor: "5"
+  room: "02"
+ferrari: 
+  floor: "3"
+  room: 09
+coppola: 
+  floor: "3"
+  room: "05"
+montana: 
+  floor: "5"
+  room: "02"
+mozart: 
+  floor: "4"
+  room: "12"
+hunwick: 
+  floor: "5"
+  room: CL-N
+koivu: 
+  floor: "5"
+  room: CL-W
+demitra: 
+  floor: "5"
+  room: CL-N
+ascari: 
+  floor: "5"
+  room: "03"
+cybele: 
+  floor: "5"
+  room: "02"
+kaikoura: 
+  floor: "4"
+  room: "01"
+jak: 
+  floor: "5"
+  room: CL-N
+beezer: 
+  floor: B
+  room: SERVER
+legwand: 
+  floor: "5"
+  room: CL-N
+wave: 
+  floor: "4"
+  room: "06"
+villeneuve: 
+  floor: "5"
+  room: "03"
+talisker: 
+  floor: "8"
+  room: "12"
+siebert: 
+  floor: "4"
+  room: 08
+real: 
+  floor: "4"
+  room: "12"
+prost: 
+  floor: "5"
+  room: "03"
+christensen: 
+  floor: "3"
+  room: 09
+americano: 
+  floor: "3"
+  room: 09
+allard: 
+  floor: "5"
+  room: CL-N
+quebec: 
+  floor: "8"
+  room: "16"
+lochend: 
+  floor: "5"
+  room: CL-S
+cannabich: 
+  floor: "4"
+  room: "12"
+violeta: 
+  floor: "3"
+  room: 09
+tulla: 
+  floor: "3"
+  room: "03"
+hunt: 
+  floor: "5"
+  room: CL-W
+honda: 
+  floor: "3"
+  room: 09
+goshawk: 
+  floor: B
+  room: SERVER
+bouillon: 
+  floor: "5"
+  room: CL-N
+budaj: 
+  floor: "5"
+  room: CL-W
+tongariro: 
+  floor: "4"
+  room: "02"
+symphony: 
+  floor: "7"
+  room: "01"
+affric: 
+  floor: "3"
+  room: "01"
+kobasew: 
+  floor: "5"
+  room: CL-N
+dodge: 
+  floor: "3"
+  room: 09
+guite: 
+  floor: "5"
+  room: CL-W
+egener: 
+  floor: "5"
+  room: CL-N
+raikkonen: 
+  floor: "4"
+  room: "12"
+mitsubishi: 
+  floor: "3"
+  room: 09
+bernier: 
+  floor: "5"
+  room: "03"
+stockbridge: 
+  floor: "4"
+  room: "01"
+rapid: 
+  floor: "4"
+  room: "12"
+auer: 
+  floor: "5"
+  room: CL-N
+dandenault: 
+  floor: "5"
+  room: "01"
+bracadale: 
+  floor: "5"
+  room: CL-W
+balvenie: 
+  floor: "4"
+  room: "14"
+kubelik: 
+  floor: B
+  room: SERVER
+stainer: 
+  floor: "5"
+  room: "02"
+cappuccino: 
+  floor: "3"
+  room: 09
+dancla: 
+  floor: "5"
+  room: CL-N
+morar: 
+  floor: "5"
+  room: CL-S
+goodwin: 
+  floor: "5"
+  room: CL-N
+loyal: 
+  floor: "5"
+  room: CL-S
+cottontail: 
+  floor: "5"
+  room: "07"
+hamilton: 
+  floor: "5"
+  room: CL-W
+aurora: 
+  floor: "4"
+  room: "14"
+auchentoshan: 
+  floor: "4"
+  room: "14"
+wideman: 
+  floor: "5"
+  room: CL-N
+rolston: 
+  floor: "5"
+  room: "02"
+lotus: 
+  floor: "3"
+  room: 09
+woodchuck: 
+  floor: "4"
+  room: 08
+voil: 
+  floor: "3"
+  room: "03"
+nissan: 
+  floor: "3"
+  room: 09
+cole: 
+  floor: "3"
+  room: 08
+mclaren: 
+  floor: "4"
+  room: 08
+titan: 
+  floor: B
+  room: SERVER
+shin: 
+  floor: "3"
+  room: "03"
+darwin: 
+  floor: B
+  room: SERVER
+brundle: 
+  floor: "4"
+  room: "12"
+moose: 
+  floor: "5"
+  room: "07"
+holmstrom: 
+  floor: "5"
+  room: CL-W
+dacia: 
+  floor: "3"
+  room: 09
+wharral: 
+  floor: "5"
+  room: CL-W
+veyatie: 
+  floor: "3"
+  room: "03"
+nardini: 
+  floor: "4"
+  room: "12"
+buie: 
+  floor: "5"
+  room: CL-W
+montreal: 
+  floor: "5"
+  room: "02"
+bechstein: 
+  floor: "5"
+  room: "02"
+yetunde: 
+  floor: "5"
+  room: "01"
+walther: 
+  floor: "4"
+  room: "12"
+ohlund: 
+  floor: "5"
+  room: CL-W
+middleby: 
+  floor: "7"
+  room: 09B
+alonso: 
+  floor: "5"
+  room: "03"
+monotreme: 
+  floor: "5"
+  room: CL-W
+lochy: 
+  floor: "5"
+  room: CL-S
+pokeno: 
+  floor: "7"
+  room: "16"
+oduya: 
+  floor: "5"
+  room: CL-W
+maverick: 
+  floor: "4"
+  room: "12"
+mankell: 
+  floor: "5"
+  room: "07"
+clement: 
+  floor: "4"
+  room: "12"
+blundell: 
+  floor: "4"
+  room: "12"
+latte: 
+  floor: "5"
+  room: CL-N
+senna: 
+  floor: "5"
+  room: CL-W
+oich: 
+  floor: "5"
+  room: CL-S
+hikuai: 
+  floor: "7"
+  room: "05"
+hill: 
+  floor: "5"
+  room: CL-W
+bazzini: 
+  floor: "5"
+  room: CL-N
+audi: 
+  floor: "3"
+  room: 09
+windsor: 
+  floor: "4"
+  room: "06"
+tekapo: 
+  floor: "4"
+  room: "02"
+spiggie: 
+  floor: "3"
+  room: "11"
+samuelsson: 
+  floor: "5"
+  room: CL-W
+ripponlea: 
+  floor: "4"
+  room: "06"
+jarvi: 
+  floor: B
+  room: SERVER
+krajicek: 
+  floor: "5"
+  room: CL-N
+mousa: 
+  floor: B
+  room: SERVER
+langdon: 
+  floor: "3"
+  room: "01"
+lidstorm: 
+  floor: "5"
+  room: CL-W
+gavini: 
+  floor: "4"
+  room: "12"
+lada: 
+  floor: "3"
+  room: 09
+nokelainen: 
+  floor: "5"
+  room: CL-N
+loanheads: 
+  floor: "6"
+  room: "02"
+dumart: 
+  floor: "4"
+  room: 08
+astonmartin: 
+  floor: "3"
+  room: 09
+alsh: 
+  floor: "5"
+  room: CL-W
+aberfeldy: 
+  floor: "4"
+  room: "14"
+lexus: 
+  floor: "3"
+  room: 09
+veracini: 
+  floor: "4"
+  room: "12"
+tessarini: 
+  floor: "4"
+  room: "12"
+hakkinen: 
+  floor: "4"
+  room: "12"
+komisarek: 
+  floor: "4"
+  room: 08
+battle: 
+  floor: "3"
+  room: "01"
+campognoli: 
+  floor: "4"
+  room: "12"
+ard: 
+  floor: "3"
+  room: "01"
+bergeron: 
+  floor: "3"
+  room: 09
+wulf: 
+  floor: B
+  room: SERVER
+thom: 
+  floor: "5"
+  room: CL-S
+parkville: 
+  floor: "5"
+  room: "02"
+creran: 
+  floor: "5"
+  room: CL-W
+ference: 
+  floor: "4"
+  room: "14"
+hoffman: 
+  floor: "4"
+  room: "14"
+volkswagen: 
+  floor: "3"
+  room: 09
+raccoon: 
+  floor: "5"
+  room: "07"
+hourn: 
+  floor: "3"
+  room: "01"
+edler: 
+  floor: "5"
+  room: CL-N
+dynamo: 
+  floor: "4"
+  room: "12"
+haydn: 
+  floor: "4"
+  room: "12"
+larsen: 
+  floor: "4"
+  room: "12"
+iggy: 
+  floor: "5"
+  room: "02"
+stradbroke: 
+  floor: "8"
+  room: 08
+ore: 
+  floor: "5"
+  room: CL-S
+lochmill: 
+  floor: "5"
+  room: CL-S
+lappy: 
+  floor: "3"
+  room: 09
+ramsay: 
+  floor: "3"
+  room: 08
+baillot: 
+  floor: "4"
+  room: "12"
+gopher: 
+  floor: "4"
+  room: 08
+wizard: 
+  floor: "5"
+  room: "02"
+trelleborgs: 
+  floor: "4"
+  room: "06"
+schaefer: 
+  floor: "5"
+  room: CL-S
+piquet: 
+  floor: "4"
+  room: "12"
+guarneri: 
+  floor: "3"
+  room: 09
+willsie: 
+  floor: "5"
+  room: CL-W
+salei: 
+  floor: "5"
+  room: CL-W
+chilliwack: 
+  floor: "7"
+  room: "05"
+drake: 
+  floor: "5"
+  room: CL-N
+yellowknife: 
+  floor: "4"
+  room: "05"
+venechar: 
+  floor: "3"
+  room: "03"
+sedin: 
+  floor: "4"
+  room: "12"
+jaguar: 
+  floor: "3"
+  room: 09
+cure: 
+  floor: "4"
+  room: "01"
+lashoff: 
+  floor: "3"
+  room: "05"
+wheeler: 
+  floor: "5"
+  room: CL-S
+waiotapu: 
+  floor: "4"
+  room: "02"
+verte: 
+  floor: B
+  room: SERVER
+samsonov: 
+  floor: "5"
+  room: CL-W
+ernie: 
+  floor: "7"
+  room: "04"
+bodnarchuk: 
+  floor: "5"
+  room: CL-S
+djurgardens: 
+  floor: "5"
+  room: CL-W
+vivaldi: 
+  floor: "4"
+  room: "12"
+boulton: 
+  floor: "4"
+  room: "14"
+beziers: 
+  floor: B
+  room: SERVER
+tarsan: 
+  floor: "5"
+  room: "01"
+rannoch: 
+  floor: "5"
+  room: CL-S
+mullardoch: 
+  floor: "5"
+  room: CL-S
+mercedes: 
+  floor: "3"
+  room: 09
+chara: 
+  floor: "5"
+  room: CL-N
+assynt: 
+  floor: "5"
+  room: CL-W
+cowan: 
+  floor: "5"
+  room: CL-N
+lamington: 
+  floor: "7"
+  room: "07"
+woodend: 
+  floor: "5"
+  room: CL-W
+prospal: 
+  floor: "5"
+  room: CL-W
+paeroa: 
+  floor: "4"
+  room: "05"
+eishort: 
+  floor: "5"
+  room: CL-W
+bluthner: 
+  floor: "5"
+  room: CL-N
+parise: 
+  floor: "4"
+  room: "12"
+habaneck: 
+  floor: "4"
+  room: "12"
+graun: 
+  floor: "4"
+  room: "12"
+metro: 
+  floor: "5"
+  room: "02"
+weiland: 
+  floor: "4"
+  room: 08
+quoich: 
+  floor: "5"
+  room: CL-S
+perrin: 
+  floor: "4"
+  room: "14"
+bugatti: 
+  floor: "3"
+  room: 09
+lessard: 
+  floor: "5"
+  room: "01"
+modin: 
+  floor: "5"
+  room: CL-W
+torelli: 
+  floor: "4"
+  room: "12"
+modano: 
+  floor: "7"
+  room: "12"
+mcrae: 
+  floor: "3"
+  room: 09
+stradivari: 
+  floor: "5"
+  room: "02"
+rode: 
+  floor: "5"
+  room: "03"
+lauda: 
+  floor: "5"
+  room: "03"
+hnidy: 
+  floor: "3"
+  room: "05"
+karsums: 
+  floor: "5"
+  room: CL-N
+edmonton: 
+  floor: "8"
+  room: "05"
+surtees: 
+  floor: "5"
+  room: "03"
+scaven: 
+  floor: "5"
+  room: CL-W
+burrows: 
+  floor: "5"
+  room: CL-N
+wallander: 
+  floor: "5"
+  room: "07"
+sturm: 
+  floor: "5"
+  room: CL-S
+stobbart: 
+  floor: "5"
+  room: CL-N
+roxy: 
+  floor: "5"
+  room: "02"
+hagen: 
+  floor: "3"
+  room: "05"
+brittle: 
+  floor: "5"
+  room: CL-W
+halak: 
+  floor: "3"
+  room: 09
+kovalev: 
+  floor: "5"
+  room: CL-W
+halifax: 
+  floor: "4"
+  room: "02"
+machacek: 
+  floor: "4"
+  room: "12"
+lovecchio: 
+  floor: "5"
+  room: CL-N
+coyote: 
+  floor: "5"
+  room: "07"
+marchand: 
+  floor: "5"
+  room: CL-N
+liles: 
+  floor: "5"
+  room: CL-W
+ruthven: 
+  floor: "5"
+  room: CL-W
+davidson: 
+  floor: "5"
+  room: CL-W
+cigar: 
+  floor: B
+  room: SERVER
+daxter: 
+  floor: "5"
+  room: CL-N
+winfield: 
+  floor: "4"
+  room: "14"
+sween: 
+  floor: "8"
+  room: "07"
+arbirlot: 
+  floor: "4"
+  room: "14"
+baumgartner: 
+  floor: "5"
+  room: CL-N
+stoater: 
+  floor: B
+  room: SERVER
+oregon: 
+  floor: "8"
+  room: "05"
+maree: 
+  floor: "5"
+  room: CL-S
+hamill: 
+  floor: "3"
+  room: 09
+trool: 
+  floor: "3"
+  room: "03"
+strathbeg: 
+  floor: "5"
+  room: "01"
+orandrad: 
+  floor: "6"
+  room: 12B
+chipchura: 
+  floor: "5"
+  room: CL-W
+backus: 
+  floor: "6"
+  room: "02"
+maggini: 
+  floor: "5"
+  room: "02"
+windylaw: 
+  floor: "5"
+  room: "02"
+scooter: 
+  floor: B
+  room: SERVER
+penner: 
+  floor: "3"
+  room: "05"
+hordichuk: 
+  floor: "5"
+  room: "02"
+brando: 
+  floor: "3"
+  room: "05"
+kreutzer: 
+  floor: "4"
+  room: "12"
+arkaig: 
+  floor: "3"
+  room: "01"
+elis: 
+  floor: "3"
+  room: 09
+plekanec: 
+  floor: "5"
+  room: CL-W
+fittipaldi: 
+  floor: "4"
+  room: "01"
+drury: 
+  floor: "5"
+  room: CL-N
+clark: 
+  floor: "5"
+  room: CL-W
+split: 
+  floor: B
+  room: SERVER
+sofia: 
+  floor: "3"
+  room: 09
+seat: 
+  floor: "3"
+  room: 09
+savard: 
+  floor: "5"
+  room: CL-S
+rollo: 
+  floor: "5"
+  room: CL-N
+lubnaig: 
+  floor: "5"
+  room: CL-S
+bobcat: 
+  floor: "5"
+  room: "07"
+migdale: 
+  floor: "5"
+  room: CL-S
+beriot: 
+  floor: "5"
+  room: CL-N
+cochrane: 
+  floor: "3"
+  room: 09
+kubica: 
+  floor: "4"
+  room: "12"
+zonda: 
+  floor: "3"
+  room: 09
+salo: 
+  floor: "5"
+  room: CL-N
+northcote: 
+  floor: "6"
+  room: "07"
+alfredsson: 
+  floor: "4"
+  room: "12"
+gilp: 
+  floor: "3"
+  room: "01"
+mascitti: 
+  floor: "4"
+  room: "12"
+cumiskey: 
+  floor: "5"
+  room: CL-W
+brabham: 
+  floor: "5"
+  room: CL-W
+arildas: 
+  floor: "3"
+  room: 09
+bitz: 
+  floor: "3"
+  room: 08
+ford: 
+  floor: "3"
+  room: 09
+kamloops: 
+  floor: "7"
+  room: "16"
+heidfeld: 
+  floor: "4"
+  room: "12"
+avalanche: 
+  floor: "6"
+  room: "01"
+wurz: 
+  floor: "4"
+  room: "12"
+neldricken: 
+  floor: "5"
+  room: CL-S
+cactus: 
+  floor: "3"
+  room: "11"
+goil: 
+  floor: "3"
+  room: "01"
+bardowie: 
+  floor: "3"
+  room: "01"
+goldfinch: 
+  floor: B
+  room: SERVER
+manfredini: 
+  floor: "4"
+  room: "12"
+kostitsyn: 
+  floor: "5"
+  room: CL-W
+arnason: 
+  floor: "3"
+  room: 08
+kozlov: 
+  floor: "4"
+  room: "14"
+laney: 
+  floor: B
+  room: SERVER
+mazda: 
+  floor: "3"
+  room: 09
+mangal: 
+  floor: "3"
+  room: 09
+crabb: 
+  floor: "4"
+  room: "14"
+awe: 
+  floor: "3"
+  room: "01"
