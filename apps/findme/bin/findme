@@ -2,18 +2,17 @@
 
 require 'pathname'
 
-TOOLS_ROOT = File.join(File.dirname(Pathname.new(__FILE__).realpath),'/../..')
-CARTO_ROOT = TOOLS_ROOT + "/carto"
+T_ROOT = File.join(File.dirname(Pathname.new(__FILE__).realpath),'/../../../lib')
 
 # We require carto in order to keep the files up to date.
-require CARTO_ROOT + "/bin/carto.rb"
+require T_ROOT + "/carto.rb"
 
 if ARGV.length != 1
   puts "Usage: findme [MATRIC]"
   exit 1
 end
 
-machine_file = '../host/machine-list'
+machine_file = '../hosts/machine-list'
 matric = ARGV[0]
 
 threads = []
@@ -26,9 +25,9 @@ unless FileTest.exist?(machine_file) and File.mtime(machine_file) > (Time.now - 
 
   (3..8).each { |i|
 
-    floor_map = get_floor("#{i}")
+    floor_map = Inventory.find_by_floor("#{i}")
 
-    floor_map.each { |room,machines| 
+    floor_map.each { |machines| 
       machines.each { |machine| machine_list.push machine }
     }
 
@@ -74,7 +73,7 @@ unless machines.empty?
   # output arrays.
   puts "Search complete. User #{matric} was found on the following machines:"
   machines.each { |m|
-    details = get_machine m
+    details = Inventory.find_by_host m
     puts "#{m} - Floor #{details['floor']}, Room #{details['room']}"
   }
   puts "Bye!"
