@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+
+TOOLS_ROOT = File.join(File.dirname(Pathname.new(__FILE__).realpath),'/../..')
+CARTO_ROOT = TOOLS_ROOT + "/carto"
+
+# We require carto in order to keep the files up to date.
+require CARTO_ROOT + "/bin/carto.rb"
+
+machine_file = '../host/machine-list'
+threads = []
+matric = ARGV[0]
+machines = []
+
+exit if ARGV.length < 1
+
+unless FileTest.exist?(machine_file) and File.mtime(machine_file) > (Time.now - 86400) 
+
+  machine_list = Array.new
+
+  (3..8).each { |i|
+
+    floor_map = get_floor("#{i}")
+
+    floor_map.each { |room,machines| 
+      machines.each { |machine| machine_list.push machine }
+    }
+
+  }
+
+  File.open(machine_file,'w') { |file|
+    machine_list.each { |machine|
+      file.write("#{machine}\n")
+    }
+  }
+
+end
+
+File.open(machine_file,'r').each { |line|
+
+  machine = line.chomp!
+
+  threads << Thread.new { 
+
+    users = `ssh -o StrictHostKeyChecking=no -o PasswordAuthentication=no #{machine} users 2> /dev/null`
+
+    regexp = Regexp.new(ARGV[0])
+
+    if users =~ regexp
+      machines << machine
+    end
+
+  }
+
+  if threads.length > 150
+    threads.each { |thread| thread.join }
+    threads = []
+  end
+
+}
+
+threads.each { |thread| thread.join }
+
+unless machines.empty?
+  # For each machine, look it up with carto and
+  # get the room name and floor. Add it to the
+  # output arrays.
+  puts "Search complete. User #{matric} was found on the following machines:"
+  machines.each { |m|
+    details = get_machine m
+    puts "#{m} - Floor #{details['floor']}, Room #{details['room']}"
+  }
+  puts "Bye!"
+else
+  puts "Search complete. Cannot find user #{matric} on any machine in AT."
+  puts "Bye!"
+end
