@@ -3,9 +3,7 @@
 require 'optparse'
 require 'pathname'
 
-BIN_ROOT = File.join(File.dirname(Pathname.new(__FILE__).realpath), '..')
-LIB_ROOT = File.join(BIN_ROOT, '..', '..', 'lib', 'carto')
-require LIB_ROOT
+require '../../../lib/carto'
 
 options = {}
 option_parser = OptionParser.new do |opts|

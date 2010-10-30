@@ -10,7 +10,7 @@ module Parser
   class << self
     def get_inventory
     	unless FileTest.exist?(YAMLNAME) and File.mtime(YAMLNAME) > (Time.now - 86400)
-        if `ping -t 5 lcfg.inf.ed.ac.uk`
+        if `ping -c 1 lcfg.inf.ed.ac.uk`
           puts ">>> Inventory out of date. Reacquiring data from the server..."
           
     			unless FileTest.exist?(PROFILENAME)

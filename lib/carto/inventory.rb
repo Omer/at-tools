@@ -1,4 +1,4 @@
-require APP_ROOT + '/lib/carto/parser'
+require LIB_ROOT + '/carto/parser'
 
 module Inventory
   include Parser
