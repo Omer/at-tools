@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require '../lib/findme'
+
+options = {}
+option_parser = OptionParser.new do |opts|
+  opts.banner = "findme is a tool to locate where you are logged in on the AT network.
+If no floor given findme would search the whole AT network.
+usage: findme_util [flag] [flag ARG] [MATRIC#]"
+
+  opts.on('-f', '--floor', 'Find by a given floor.') { |v| options[:floor] = v }
+  opts.on('-h', '--help', 'Display this screen.' ) do
+       puts opts
+       exit 0
+  end
+end
+  
+begin 
+  option_parser.parse! ARGV
+  if (options[:floor] and ARGV.length != 2) or (options.empty? and ARGV.length != 1)
+    puts option_parser
+    exit 1
+  end
+rescue OptionParser::InvalidOption => error
+  puts error
+  puts option_parser
+  exit 1
+end
+
+if options[:floor] 
+  matric = ARGV[1]
+  machines = Findme.search_floor(ARGV[0], matric) 
+else
+  matric = ARGV[0]
+  machines = Findme.search_all_floors(matric)
+end
+
+unless machines.empty?
+  puts "Search complete. User #{matric} was found on the following machines:"
+
+  machines.each do |machine|
+    details = Inventory.find_by_host(machine)
+    puts "#{machine} - Floor #{details['floor']}, Room #{details['room']}"
+  end
+
+else
+  puts "Search complete. Cannot find user #{matric} on any machine in AT."
+end
