@@ -12,7 +12,7 @@ def command(command, dir = '.')
 end
 
 AT_TOOLS_DIR = File.expand_path('~/.at-tools/')
-AT_APPS_DIR = AT_TOOLS_BIN + '/apps'
+AT_APPS_DIR = AT_TOOLS_DIR + '/apps'
 AT_TOOLS_BIN = AT_TOOLS_DIR + '/bin'
 
 puts "Making directories"

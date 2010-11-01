@@ -118,16 +118,16 @@ class ClientGui
         	dialog.destroy
 	end
         
-        if lab_cascaders.length > 0
-        	if @user.lab == "at5n"
-	        	at5n_map(@user.hostname,lab_cascaders_map)
-	        elsif @user.lab == "at5w"
-        		at5w_map(@user.hostname,lab_cascaders_map)
-        	elsif @user.lab == "at5s"
-	        	at5s_map(@user.hostname,lab_cascaders_map)
-	        elsif @user.lab == "at5e"
-	        	at5e_map(@user.hostname,lab_cascaders_map)
-	        end
-	end
+#        if lab_cascaders.length > 0
+#        	if @user.lab == "at5n"
+#	        	at5n_map(@user.hostname,lab_cascaders_map)
+#	        elsif @user.lab == "at5w"
+#        		at5w_map(@user.hostname,lab_cascaders_map)
+#        	elsif @user.lab == "at5s"
+#	        	at5s_map(@user.hostname,lab_cascaders_map)
+#	        elsif @user.lab == "at5e"
+#	        	at5e_map(@user.hostname,lab_cascaders_map)
+#	        end
+#	end
     end
 end #class
